@@ -43,15 +43,31 @@ public class ProdutosDAO {
             System.out.println("Erro ao cadastrar: " + ex.getMessage());
             return ex.getErrorCode();
         }
-        
-        
-        
-        
     }
     
+    
     public ArrayList<ProdutosDTO> listarProdutos(){
-        
-        return listagem;
+        try{
+            conn = DriverManager.getConnection(url, user, password);
+            st = conn.prepareStatement("SELECT * FROM produtos");
+            rs = st.executeQuery();
+          
+            ArrayList<ProdutosDTO> listaProdutos = new ArrayList<>();
+          
+            while(rs.next()){
+                ProdutosDTO produto = new ProdutosDTO();
+                produto.setId(rs.getInt("id"));
+                produto.setNome(rs.getString("nome"));
+                produto.setValor(rs.getInt("valor"));
+                produto.setStatus(rs.getString("status"));
+              
+                listaProdutos.add(produto);
+            }
+            return listaProdutos;
+        }catch (SQLException ex){
+            System.out.println("Erro ao conectar: " + ex.getMessage());
+            return null;
+        }  
     }
     
     

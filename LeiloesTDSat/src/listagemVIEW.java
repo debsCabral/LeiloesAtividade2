@@ -208,14 +208,14 @@ public class listagemVIEW extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
             model.setNumRows(0);
             
-            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
+            ArrayList<ProdutosDTO> listaProdutos = produtosdao.listarProdutos();
             
-            for(int i = 0; i < listagem.size(); i++){
+            for(int i = 0; i < listaProdutos.size(); i++){
                 model.addRow(new Object[]{
-                    listagem.get(i).getId(),
-                    listagem.get(i).getNome(),
-                    listagem.get(i).getValor(),
-                    listagem.get(i).getStatus()
+                    listaProdutos.get(i).getId(),
+                    listaProdutos.get(i).getNome(),
+                    listaProdutos.get(i).getValor(),
+                    listaProdutos.get(i).getStatus()
                 });
             }
         } catch (Exception e) {
