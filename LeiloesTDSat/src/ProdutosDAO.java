@@ -36,6 +36,7 @@ public class ProdutosDAO {
             st = conn.prepareStatement("INSERT INTO produtos (nome, valor, status) VALUES (?,?, 'A Venda')");
             st.setString(1, produto.getNome());
             st.setString(2, Integer.toString(produto.getValor()));
+            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
             status = st.executeUpdate();
             return status;
         }catch (SQLException ex) {
