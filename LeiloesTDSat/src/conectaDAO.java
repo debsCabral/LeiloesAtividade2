@@ -1,6 +1,8 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -17,17 +19,37 @@ import javax.swing.JOptionPane;
  */
 public class conectaDAO {
     
-    public Connection connectDB(){
-        Connection conn = null;
-        
-        try {
-        
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/uc11?user=root&password=");
-            
-        } catch (SQLException erro){
-            JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
+    Connection conn;
+    PreparedStatement st;
+    ResultSet rs;
+    
+    public String url = "jdbc:mysql://localhost:3306/leiloes";
+    public String user = "root";
+    public String password = "dgc26275141";
+    
+    public boolean conectar(){
+        try{
+            conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Conexão realizazda com sucesso");
+            return true;
+        }catch (SQLException ex) {
+            System.out.println("Erro ao conectar: " + ex.getMessage());
+            return false;
         }
+    }
+    
+    
+    public Connection getConexao(){
         return conn;
+    }
+    
+    
+    public void desconectar(){
+        try {
+            conn.close();
+        }catch (SQLException ex){
+            
+        }
     }
     
 }
