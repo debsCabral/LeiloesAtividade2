@@ -71,7 +71,19 @@ public class ProdutosDAO {
     }
     
     
-    
+    public int venderProduto(ProdutosDTO produto){
+        int status;
+        try{
+            conn = DriverManager.getConnection(url, user, password);
+            st = conn.prepareStatement("UPDATE produtos SET status = 'Vendido' WHERE id = ?");
+            st.setString(1, Integer.toString(produto.getId()));
+            status = st.executeUpdate();
+            return status;  
+        }catch (SQLException ex) {
+            System.out.println("Erro ao cadastrar: " + ex.getMessage());
+            return ex.getErrorCode();
+        }
+    }
         
 }
 
